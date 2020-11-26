@@ -7,10 +7,15 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CarRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=CarRepository::class)
  * @ORM\HasLifecycleCallbacks
+ * @UniqueEntity(
+ *  fields = {"slug"}
+ * )
  */
 class Car
 {
@@ -32,7 +37,10 @@ class Car
     private $model;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message="Veuillez ajouter une image")
+     * @Assert\Image(mimeTypes={"image/png", "image/jpeg", "image/jpg", "image/gif"}, mimeTypesMessage="Vous devez upload un fichier jpg, png ou gif")
+     * @Assert\File(maxSize="1024k", maxSizeMessage="Taille du fichier trop grande")
      */
     private $coverImage;
 
