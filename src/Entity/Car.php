@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\CarRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CarRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=CarRepository::class)
+ * @ORM\HasLifeCycleCallbacks
  */
 class Car
 {
@@ -97,6 +99,18 @@ class Car
     public function __construct()
     {
         $this->images = new ArrayCollection();
+    }
+
+    /**
+     * Function that generates automatically the slug for the Car entity
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     *
+     * @return void
+     */
+    public function initializeSlug(){
+        $slugify = new Slugify();
+        $this->slug = $slugify->slugify($this->brand." ".$this->model." ".$this->id);
     }
 
     public function getId(): ?int
