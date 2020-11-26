@@ -1,14 +1,14 @@
 {# CARD STRUCTURE #}
-<div class="card col-3">
+<div class="card col-3 my-3 mx-1">
     {# CARDs IMAGE #}
-    <img src="images/Renault_Safrane.jpg" alt="Renault Safrane">
+    <img src="{{car.coverImage}}" alt="Image de {{car.brand}} {{car.model}}">
     {# CARDs BODY #}
     <div class="card-body text-center">
         {# CARs BRAND AND MODEL #}
-        <h3 class="card-title">Renault Safrane</h3>
+        <h3 class="card-title">{{car.brand}} {{car.model}}</h3>
         {# CARs PRCE AND MILEAGE #}
-        <h5>2300€ - 145.000km</h5>
+        <h5>{{car.price}}€ - {{car.mileage}}km</h5>
         {# LINK TO CAR PAGE #}
-        <a href="#" class="btn btn-primary">Voir la voiture</a>
+        <a href="{{ path("car",{'slug':car.slug}) }}" class="btn btn-primary">Voir la voiture</a>
     </div>
 </div>

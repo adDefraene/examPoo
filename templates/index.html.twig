@@ -22,10 +22,11 @@
 <!-- LAST CARS -->
     <h2 class="mb-3">Nos dernières voitures :</h2>
     <div class="row justify-content-around my-3">
-        {% include "/partials/_card.html.twig" %}
-        {% include "/partials/_card.html.twig" %}
-        {% include "/partials/_card.html.twig" %}
+        {# ALL CARDS HERE #}
+        {% for car in cars %}
+            {% include "/partials/_card.html.twig" %}
+        {% endfor %}
     </div>
-    <a href="catalogue.html" class="btn btn-primary">Voir le reste du catalogue</a>
+    <a href="{{path('catalogue')}}" class="btn btn-primary">Voir le reste du catalogue</a>
 </div>
 {% endblock %}

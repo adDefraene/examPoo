@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=CarRepository::class)
- * @ORM\HasLifeCycleCallbacks
+ * @ORM\HasLifecycleCallbacks
  */
 class Car
 {
@@ -24,7 +24,7 @@ class Car
     /**
      * @ORM\Column(type="string", length=25)
      */
-    private $Brand;
+    private $brand;
 
     /**
      * @ORM\Column(type="string", length=40)
@@ -109,8 +109,10 @@ class Car
      * @return void
      */
     public function initializeSlug(){
-        $slugify = new Slugify();
-        $this->slug = $slugify->slugify($this->brand." ".$this->model." ".$this->id);
+        if(empty($this->slug)){
+            $slugify = new Slugify();
+            $this->slug = $slugify->slugify($this->brand." ".$this->model." ".rand());
+        }
     }
 
     public function getId(): ?int
@@ -120,12 +122,12 @@ class Car
 
     public function getBrand(): ?string
     {
-        return $this->Brand;
+        return $this->brand;
     }
 
-    public function setBrand(string $Brand): self
+    public function setBrand(string $brand): self
     {
-        $this->Brand = $Brand;
+        $this->brand = $brand;
 
         return $this;
     }

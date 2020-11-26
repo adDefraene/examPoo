@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catalogue{% endblock %}
+
+{# CATALOGUE PAGE #}
+{% block body %}
+    <div class="container">
+        <h1 class="dipslay-4 m-3">Notre catalogue :</h1>
+        <div class="row justify-content-around">
+            {# ALL CARDS HERE #}
+            {% for car in cars %}
+                {% include "/partials/_card.html.twig" %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{car.brand}} {{car.model}}{% endblock %}
+
+{# CAR PAGE #}
+{% block body %}
+<div class="container">
+    <a href="{{path('catalogue')}}" class="btn btn-primary mt-4">Retour au catalogue</a>
+    <div class="row">
+        <div class="col-12 text-center">
+            <img src="{{car.coverImage}}" id="img-col" class="my-5" alt="Image de {{car.brand}} {{car.model}}">
+            <h1 class="display-4 mb-5">{{car.brand}} {{car.model}}</h1>
+        </div>
+        <div class="col-5">
+            <h2 class="display-4">Options</h2>
+            <p class="ml-3">{{car.options}}</p>
+            <h2 class="display-4 mt-4">Description</h2>
+            <p>{{car.description | raw}}</p>
+        </div>
+        <div class="col-6 offset-1">
+            <div class="row text-center">
+                <p class="col-6 p-1">Marque - {{car.brand}}</p>
+                <p class="col-6 p-1">Modèle - {{car.model}}</p>
+                <hr class="col-12">
+                <p class="col-6 p-1">Kilométrage - {{car.mileage}}km</p>
+                <p class="col-6 p-1">Prix - {{car.price}}€</p>
+                <hr class="col-12">
+                <p class="col-6 p-1">Nombre d'anciens propriétaires - {{car.oldOwner}}</p>
+                <p class="col-6 p-1">Cylindrée - {{car.engineCc}}CC</p>
+                <hr class="col-12">
+                <p class="col-6 p-1">Puissance - {{car.enginePower}}Kw/h</p>
+                <p class="col-6 p-1">Carburant - {{car.fuel}}</p>
+                <hr class="col-12">
+                <p class="col-6 p-1">Année de mise en circulation - {{car.yearRelease}}</p>
+                <p class="col-6 p-1">Transmission - {{car.transmission}}</p>
+            </div>
+        </div>
+        <div class="col my-4">
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    {% for image in car.images %}
+                        <div class="carousel-item {% if loop.first %}active{% endif %}">
+                            <img src="{{image.picture}}" class="d-block w-100">
+                        </div>
+                    {% endfor %}
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="{{path('catalogue')}}" class="btn btn-primary">Retour au catalogue</a>
+</div>
+{% endblock %}
