@@ -1,4 +1,7 @@
 {
+    "cocur/slugify": {
+        "version": "v4.0.0"
+    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.1"
     },
@@ -80,6 +83,9 @@
     },
     "egulias/email-validator": {
         "version": "2.1.24"
+    },
+    "fzaninotto/faker": {
+        "version": "v1.9.1"
     },
     "laminas/laminas-code": {
         "version": "3.5.0"
