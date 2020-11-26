@@ -1,0 +1,66 @@
+*{margin:0;padding:0;}
+/* WEBSITE IN 100% */
+html, body{height: 100%;width: 100%;}
+
+/***************** NAV ********************/
+
+/* MAKE NAV LINKS HORIZONTAL */
+.navbar-nav{flex-direction: row;}
+
+/***************** HEADER ********************/
+
+/* STYLE FOR THE HEADER IN HOME PAGE */
+#home-header{
+    position: relative;
+    width: 100%;
+    height: 30%;
+    box-shadow: inset 0 0 200px 50px #111;
+    background-image: url("images/home_header.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+/* STYLE FOR THE TITLE INSIDE THE HEADER */
+#home-header h1{
+    position: absolute;
+    top: 25%;
+    left: 10%;
+    font-size: 5rem;
+    text-shadow: 5px 5px 0 #111 !important;
+}
+
+/* STYLE FOR THE "LOGOS" TEXTS */
+#home-header h1, .navbar-brand{
+    text-shadow: 2px 2px 0px #111;
+    color: #eee;
+    font-weight: bolder;
+}
+
+/***************** CARDS STYLE ********************/
+
+/* RESET PADDING */
+.card{padding: 0;}
+
+/* SIZES FOR THE CARDs IMAGE */
+.card img{
+    display: block;
+    height: auto;
+    width: 100%;
+}
+
+/***************** FOOTER ********************/
+
+/* TEXTs FOOTER COLOUR */
+footer a{color: #eee;}
+footer a:hover{color: #aaa;}
+
+/* FONT AWESOME ICONS */
+#footer-infos i{font-size: 2.25rem;}
+
+/***************** CAR PAGE ********************/
+/* BIG MAIN IMAGE */
+#img-col{
+    width: 40vw;
+    height: auto;
+}
