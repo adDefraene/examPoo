@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block body %}
+<!-- HOME HEADER -->
+<header id="home-header">
+    <h1>IPSEM'S GARAGE</h1>
+</header>
+
+<!-- MAIN SECTION -->
+<div class="container">
+
+<!-- WELCOME JUMBOTRON -->
+    <div class="jumbotron p-3 mt-3 bg-white">
+        <h1 class="display-4">Bienvenue au Ipsem's garage !</h1>
+        <p class="lead">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit aperiam qui, cumque accusantium esse obcaecati excepturi atque adipisci voluptatem consequuntur tempora. Quasi recusandae, reprehenderit dolore explicabo dolor quas dicta. Consequuntur quod quia a quam!</p>
+        <hr class="my-4">
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum facere quidem similique, voluptate perferendis repudiandae possimus adipisci odit consequatur, minus, ex saepe nobis perspiciatis reiciendis nesciunt omnis voluptatibus cum! Ab quisquam quas, autem tenetur tempora fuga illum id pariatur consectetur beatae ducimus provident necessitatibus commodi? Soluta facere at enim fugiat. Beatae, odit totam. Ipsa!</p>
+    </div>
+
+<!-- LAST CARS -->
+    <h2 class="mb-3">Nos dernières voitures :</h2>
+    <div class="row justify-content-around my-3">
+        {% include "/partials/_card.html.twig" %}
+        {% include "/partials/_card.html.twig" %}
+        {% include "/partials/_card.html.twig" %}
+    </div>
+    <a href="catalogue.html" class="btn btn-primary">Voir le reste du catalogue</a>
+</div>
+{% endblock %}
