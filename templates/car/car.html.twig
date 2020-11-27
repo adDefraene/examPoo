@@ -46,7 +46,12 @@
                 <div class="carousel-inner">
                     {% for image in car.images %}
                         <div class="carousel-item {% if loop.first %}active{% endif %}">
-                            <img src="{{image.picture}}" class="d-block w-100">
+                            <img src="
+                {% if image.picture matches '{^http}' %}
+                    {{image.picture}}
+                {% else %}
+                    /images/{{image.picture}}
+                {% endif %}" class="d-block w-100">
                         </div>
                     {% endfor %}
                 <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">

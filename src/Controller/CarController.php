@@ -3,34 +3,17 @@
 namespace App\Controller;
 
 use App\Entity\Car;
+use App\Entity\Image;
 use App\Form\CarType;
 use App\Repository\CarRepository;
-/*
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-*/
-
-use App\Entity\User;
-use App\Form\AccountType;
-use App\Form\ImgModifyType;
-use App\Entity\UserImgModify;
-use App\Entity\PasswordUpdate;
-use App\Form\RegistrationType;
-use App\Form\PasswordUpdateType;
-use Symfony\Component\Form\FormError;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class CarController extends AbstractController
 {
@@ -68,35 +51,48 @@ class CarController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
         //INIT SLUG
             $car->setSlug('');
-            
 
         //TREAT EACH IMAGES
-        /*
-                $file = $form['images']->getData();
-                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
-                try{
-                    $file->move(
-                        $this->getParameter('uploads_directory'),
-                        $newFilename
-                    );
-                }
-                catch(FileException $e)
-                {
-                    return $e->getMessage();
+            foreach($car->getImages() as $key => $picture){
+                //dump($picture);
+                //dump($picture['picture']);
+                //CREATE THE OBJECT
+                $image = new Image();
+
+                $file = $picture['picture'];
+                if(!empty($file)){
+
+                    $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                    $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                    $newFilename = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
+                    try{
+                        $file->move(
+                            $this->getParameter('uploads_directory'),
+                            $newFilename
+                        );
+                    }
+                    catch(FileException $e)
+                    {
+                        return $e->getMessage();
+                    }
+                    //SET THE CORRECT FILE
+                    $image->setPicture($newFilename);
                 }
 
-                $picture->setPicture($newFilename);
-        */
+                //SET THE CAR
+                $image->setCar($car);
+                //FUNCTION THAT REPLACE THE FILE SENT BY THE CORRECT ENTITY
+                $car->removeWrongImage($key, $image);
+                //PERSIST THE NEW ENTITY
+                $manager->persist($image);
+                //dump($car);
+            }
 
-            foreach($car->getImages() as $picture){ 
-                $picture->setCar($car);
-                $manager->persist($picture);
-            } 
+
         //TREAT THE CARs INFOS
             //COVER IMAGE
             $fileCover = $form['coverImage']->getData();
+            
             if(!empty($fileCover)){
 
                 $originalFilenameCover = pathinfo($fileCover->getClientOriginalName(), PATHINFO_FILENAME);
@@ -115,8 +111,9 @@ class CarController extends AbstractController
                 
                 $car->setCoverImage($newFilenameCover);
             }
-
+            dump($car);
             $manager->persist($car);
+            
             $manager->flush();
 
         //SET THE MESSAGE

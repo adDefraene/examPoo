@@ -27,7 +27,7 @@ class Image
     private $picture;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Car::class, inversedBy="images")
+     * @ORM\ManyToOne(targetEntity=Car::class, inversedBy="images", cascade={"persist"})
      */
     private $car;
 

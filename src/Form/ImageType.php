@@ -20,8 +20,6 @@ class ImageType extends AppType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => Image::class,
-        ]);
+        $resolver->setDefaults([]);
     }
 }

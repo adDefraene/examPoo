@@ -314,6 +314,20 @@ class Car
         return $this;
     }
 
+    /**
+     * Function that replaces the files sent by the correct Image Entity in the new car form
+     *
+     * @param array $keyImage
+     * @param Image $image
+     * @return Response
+     */
+    public function removeWrongImage($keyImage, Image $image)
+    {
+        $this->images[$keyImage] = $image;
+        $image->setCar($this);
+        return $this;
+    }
+
     public function getSlug(): ?string
     {
         return $this->slug;

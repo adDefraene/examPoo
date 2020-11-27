@@ -24,6 +24,14 @@ class AppType extends AbstractType
     
     }
 
+    /**
+     * Function that ease the configuration of a integer value in a form
+     *
+     * @param string $label
+     * @param string $placeholder
+     * @param array $options
+     * @return array
+     */
     protected function getConfigNumber($label, $placeholder, $min, $max, $step = 1, $options = [])
     {
         return array_merge([
