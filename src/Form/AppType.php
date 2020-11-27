@@ -18,9 +18,22 @@ class AppType extends AbstractType
         return array_merge([
             'label'=> $label,
             'attr'=> [
-                'placeholder'=> $placeholder
+                'placeholder'=> $placeholder,
             ]
         ], $options);
     
+    }
+
+    protected function getConfigNumber($label, $placeholder, $min, $max, $step = 1, $options = [])
+    {
+        return array_merge([
+            'label'=> $label,
+            'attr'=> [
+                'placeholder'=> $placeholder,
+                'min' => $min,
+                'max' => $max,
+                'step' => $step
+            ]
+        ], $options);
     }
 }

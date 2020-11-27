@@ -68,6 +68,7 @@ class CarController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
         //INIT SLUG
             $car->setSlug('');
+            
 
         //TREAT EACH IMAGES
         /*

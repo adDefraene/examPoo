@@ -11,7 +11,6 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -24,11 +23,11 @@ class CarType extends AppType
             ->add('brand', TextType::class, $this->getConfiguration("Marque", "Marque de la voiture"))
             ->add('model', TextType::class, $this->getConfiguration("Modèle", "Modèle de la voiture"))
             ->add('coverImage', FileType::class, $this->getConfiguration("Image de couverture", "Image de la couverture de l'annonce"))
-            ->add('mileage', NumberType::class, $this->getConfiguration("Kilométrage", "Nombre de km de la voiture (xxxxxxkm)"))
+            ->add('mileage', IntegerType::class, $this->getConfigNumber("Kilométrage", "Nombre de km de la voiture (xxxxxxkm)", 1, 200000))
             ->add('price', MoneyType::class, $this->getConfiguration("Prix", "Prix de vente de la voiture (xxxx€)"))
-            ->add('oldOwner', IntegerType::class, $this->getConfiguration("Anciens propriétaires", "Nombre d'anciens propriétaires"))
-            ->add('engineCc', NumberType::class, $this->getConfiguration("Cylindrée", "Cylindrée de la voiture (xxxxCC)"))
-            ->add('enginePower', NumberType::class, $this->getConfiguration("Puissance", "Puissance de la voiture (xxKw/h)"))
+            ->add('oldOwner', IntegerType::class, $this->getConfigNumber("Anciens propriétaires", "Nombre d'anciens propriétaires", 1,10))
+            ->add('engineCc', IntegerType::class, $this->getConfigNumber("Cylindrée", "Cylindrée de la voiture (xxxxCC)", 1100, 1900, 100))
+            ->add('enginePower', IntegerType::class, $this->getConfigNumber("Puissance", "Puissance de la voiture (xxKw/h)", 10, 99))
             ->add('fuel', ChoiceType::class, [
                 'choices' => [
                     'Essence' => 'essence',
@@ -38,7 +37,7 @@ class CarType extends AppType
                 ],
                 'label' => 'Type de carburant'
             ])
-            ->add('yearRelease', NumberType::class, $this->getConfiguration("Année de mise en circulation", "Année de mise en circulation du véhicule"))
+            ->add('yearRelease', IntegerType::class, $this->getConfigNumber("Année de mise en circulation", "Année de mise en circulation du véhicule",1940, 2020))
             ->add('transmission', ChoiceType::class, [
                 'choices' => [
                     'Automatique' => 'automatique',
