@@ -28,8 +28,8 @@
                 <p class="col-6 p-1">Marque - {{car.brand}}</p>
                 <p class="col-6 p-1">Modèle - {{car.model}}</p>
                 <hr class="col-12">
-                <p class="col-6 p-1">Kilométrage - {{car.mileage}}km</p>
-                <p class="col-6 p-1">Prix - {{car.price}}€</p>
+                <p class="col-6 p-1">Kilométrage - {{car.mileage | number_format(0, "", ".")}}km</p>
+                <p class="col-6 p-1">Prix - {{car.price | number_format(2, ",", " ")}}€</p>
                 <hr class="col-12">
                 <p class="col-6 p-1">Nombre d'anciens propriétaires - {{car.oldOwner}}</p>
                 <p class="col-6 p-1">Cylindrée - {{car.engineCc}}CC</p>

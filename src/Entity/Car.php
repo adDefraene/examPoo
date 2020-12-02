@@ -307,6 +307,7 @@ class Car
         if ($this->images->removeElement($image)) {
             // set the owning side to null (unless already changed)
             if ($image->getCar() === $this) {
+                /* FOR THE EDIT, PUT HERE THE UNLINK */
                 $image->setCar(null);
             }
         }

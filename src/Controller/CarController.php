@@ -48,6 +48,36 @@ class CarController extends AbstractController
         $form->handleRequest($req);
 
     //IF FORM SENT
+
+        /*JORDANs 
+        
+        if($form->isSubmitted() && $form->isValid()){
+
+            dump($ad->getImages());
+            foreach($ad->getImages() as $image)
+            {
+                $file = $image->getUrl();
+                dump($file->getClientOriginalName());
+                if(!empty($file)){
+                    $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                    $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                    $newFilename = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
+                    try{
+                        $file->move(
+                            $this->getParameter('uploads_directory'),
+                            $newFilename
+                        );
+                    }
+                    catch(FileException $e)
+                    {
+                        return $e->getMessage();
+                    }
+                    $image->setUrl($newFilename);
+                }   
+            }
+
+        */
+
         if($form->isSubmitted() && $form->isValid()){
         //INIT SLUG
             $car->setSlug('');

@@ -13,7 +13,7 @@
         {# CARs BRAND AND MODEL #}
         <h3 class="card-title">{{car.brand}} {{car.model}}</h3>
         {# CARs PRCE AND MILEAGE #}
-        <h5>{{car.price}}€ - {{car.mileage}}km</h5>
+        <h5>{{car.price | number_format(2, ",", " ")}}€ - {{car.mileage | number_format(0, "", ".")}}km</h5>
         {# LINK TO CAR PAGE #}
         <a href="{{ path("car",{'slug':car.slug}) }}" class="btn btn-primary">Voir la voiture</a>
     </div>
